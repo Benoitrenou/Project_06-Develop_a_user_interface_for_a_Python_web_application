@@ -1,0 +1,123 @@
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Just Stream It</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <div class="wrapper">
+
+    <!-- HEADER -->
+    <header>
+      <div class="netflixLogo">
+        <a id="logo" href="#home"><img src="https://github.com/carlosavilae/Netflix-Clone/blob/master/img/logo.PNG?raw=true" alt="Logo Image"></a>
+      </div>      
+      <nav class="main-nav">                
+        <a href="#home">Accueil</a>
+        <a href="#meilleursfilms">Meilleurs Films</a>
+        <a href="#western">Western</a>
+        <a href="#categ2">Catégorie 2</a>
+        <a href="#categ3">Catégorie 3</a>
+      </nav>
+      <nav class="sub-nav">
+        <a href="#">Compte Perso</a>        
+      </nav>      
+    </header>
+    <!-- END OF HEADER -->
+    
+    <!-- MAIN CONTAINER -->
+    <section class="main-container" >
+      <div class="location" id="home">
+          <h1 id="home">Meilleur film IMDB</h1>
+          <div class="box">
+            <a href=""><img src="./img/evades.jpg" alt=""></a>       
+          </div>
+      </div>
+    </section>
+
+
+    <section class="thumbSection">
+      <h1 id="meilleursfilms">Meilleurs Films</h1>
+      <div class="thumbTiles swiper-container">
+        <div class="box swiper-wrapper">
+          <button onClick="openModal('')" class="js-modal swiper-slide"> <img src="./img/best_movies/pulpfiction.jpg" alt=""> </button>
+          <button onClick="openModal('')" class="js-modal swiper-slide"> <img src="./img/best_movies/godfather.jpg" alt=""> </button>
+          <button onClick="openModal('')" class="js-modal swiper-slide"> <img src="./img/best_movies/12angrymen.jpg" alt=""> </button>
+          <button onClick="openModal('')" class="js-modal swiper-slide"> <img src="./img/best_movies/batman.jpg" alt=""> </button>
+          <button onClick="openModal('')" class="js-modal swiper-slide"> <img src="./img/best_movies/lotr.jpg" alt=""> </button>
+          <button onClick="openModal('')" class="js-modal swiper-slide"> <img src="./img/best_movies/schindler.jpg" alt=""> </button>
+          <button onClick="openModal('')" class="js-modal swiper-slide"><img src="./img/best_movies/godfather2.jpg" alt=""> </button>
+        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+    </section>
+
+      
+      <h1 id="western">Western</h1>
+      <div class="box">
+        <a href=""><img src="./img/westerns/django.jpg" alt=""></a>
+        <a href=""><img src="" alt=""></a>
+        <a href=""><img src="" alt=""></a>
+        <a href=""><img src="" alt=""></a>
+        <a href=""><img src="" alt=""></a>
+        <a href=""><img src="" alt=""></a>
+        <a href=""><img src="" alt=""></a>
+      </div>
+      
+
+      <h1 id="categ2">Catégorie 2</h1>
+      <div class="box">
+        <a href=""><img src="" alt=""></a>
+        <a href=""><img src="" alt=""></a>
+        <a href=""><img src="" alt=""></a>
+        <a href=""><img src="" alt=""></a>
+        <a href=""><img src="" alt=""></a>
+        <a href=""><img src="" alt=""></a>
+        <a href=""><img src="" alt=""></a>
+      </div>
+
+      <h1 id="categ3">Catégorie 3</h1>
+      <div class="box">
+        <a href=""><img src="" alt=""></a>
+        <a href=""><img src="" alt=""></a>
+        <a href=""><img src="" alt=""></a>
+        <a href=""><img src="" alt=""></a>
+        <a href=""><img src="" alt=""></a>
+        <a href=""><img src="" alt=""></a>
+        <a href=""><img src="" alt=""></a>
+      </div>
+
+      <aside id="modal" class="modal" style="display:none">
+        <div class="modal-wrapper js-modal-stop">
+          <button class="js-modal-close" id="closeButton">&times;</button>
+          <h1>Infos via API</h1>
+          <p id="Anneedesortie">Informations sur le film obtenues via l'API</p>
+        </div>
+      </aside>
+     
+    <!-- END OF MAIN CONTAINER -->
+
+    <!-- LINKS -->
+    <section class="link">
+      <div class="sub-links">
+        <ul>
+          <li><a href="#">Audio and Subtitles</a></li>
+          <li><a href="#">Audio Description</a></li>
+          <li><a href="#">Help Center</a></li>
+          <li><a href="#">Gift Cards</a></li>
+        </ul>
+      </div>
+    </section>
+    <!-- END OF LINKS -->
+
+    <!-- FOOTER -->
+    <footer>
+      <p>&copy Netflix, Inc.</p>
+      <p>Benoit Renou - 2021 </p>
+      <p>Copy pour OpenClassRooms</p>
+    </footer>
+  </div>
+  <script src="./js/modal.js"></script>
+</body>
+</html>
