@@ -30,71 +30,41 @@
       <div class="location" id="home">
           <h1 id="home">Meilleur film IMDB</h1>
           <div class="box">
-            <a href=""><img src="./img/evades.jpg" alt=""></a>       
+            <button onClick="openModal('')" class="js-modal swiper-slide"> <img id="movie10" id_api = "" src=""></button>       
           </div>
       </div>
     </section>
-
-
-    <section class="thumbSection">
-      <h1 id="meilleursfilms">Meilleurs Films</h1>
-      <div class="thumbTiles swiper-container">
-        <div class="box swiper-wrapper">
-          <button onClick="openModal('')" class="js-modal swiper-slide"> <img src="./img/best_movies/pulpfiction.jpg" alt=""> </button>
-          <button onClick="openModal('')" class="js-modal swiper-slide"> <img src="./img/best_movies/godfather.jpg" alt=""> </button>
-          <button onClick="openModal('')" class="js-modal swiper-slide"> <img src="./img/best_movies/12angrymen.jpg" alt=""> </button>
-          <button onClick="openModal('')" class="js-modal swiper-slide"> <img src="./img/best_movies/batman.jpg" alt=""> </button>
-          <button onClick="openModal('')" class="js-modal swiper-slide"> <img src="./img/best_movies/lotr.jpg" alt=""> </button>
-          <button onClick="openModal('')" class="js-modal swiper-slide"> <img src="./img/best_movies/schindler.jpg" alt=""> </button>
-          <button onClick="openModal('')" class="js-modal swiper-slide"><img src="./img/best_movies/godfather2.jpg" alt=""> </button>
+    
+    <div id ="meilleursfilms" class="container">
+      <h1>Meilleurs Films</h1>
+      <button type="button" id="moveLeft" class="btn-nav"> ᐊ </button>
+      <div class="container-indicators">
+        <div class="indicator active" data-index=0></div>
+        <div class="indicator" data-index=1></div>
+      </div>
+      <div class="slider" id="mySlider">
+        <div class="movie" id="movie0">
+          <img src="" alt="" srcset="" onClick="openModal('')" class="js-modal swiper-slide">
+          <div class="description">
+            <div class="description_title">
+              <h2 onClick="openModal('')" class="js-modal swiper-slide"> Titre du film </h2>
+            </div>
+            <div class="imdb_note">
+              <h2> Note IMDB : 6.7/10 </h2>
+            </div>
+          </div>
         </div>
-        <div class="swiper-button-prev"></div>
-        <div class="swiper-button-next"></div>
       </div>
-    </section>
+      <button type="button" id="moveRight" class="btn-nav"> ᐅ </button>
+    </div>
 
-      
-      <h1 id="western">Western</h1>
-      <div class="box">
-        <a href=""><img src="./img/westerns/django.jpg" alt=""></a>
-        <a href=""><img src="" alt=""></a>
-        <a href=""><img src="" alt=""></a>
-        <a href=""><img src="" alt=""></a>
-        <a href=""><img src="" alt=""></a>
-        <a href=""><img src="" alt=""></a>
-        <a href=""><img src="" alt=""></a>
+    <aside id="modal" class="modal" style="display:none">
+      <div class="modal-wrapper js-modal-stop">
+        <button class="js-modal-close" id="closeButton">&times;</button>
+        <h1>Infos via API</h1>
+        <p id="Anneedesortie">Informations sur le film obtenues via l'API</p>
       </div>
-      
-
-      <h1 id="categ2">Catégorie 2</h1>
-      <div class="box">
-        <a href=""><img src="" alt=""></a>
-        <a href=""><img src="" alt=""></a>
-        <a href=""><img src="" alt=""></a>
-        <a href=""><img src="" alt=""></a>
-        <a href=""><img src="" alt=""></a>
-        <a href=""><img src="" alt=""></a>
-        <a href=""><img src="" alt=""></a>
-      </div>
-
-      <h1 id="categ3">Catégorie 3</h1>
-      <div class="box">
-        <a href=""><img src="" alt=""></a>
-        <a href=""><img src="" alt=""></a>
-        <a href=""><img src="" alt=""></a>
-        <a href=""><img src="" alt=""></a>
-        <a href=""><img src="" alt=""></a>
-        <a href=""><img src="" alt=""></a>
-        <a href=""><img src="" alt=""></a>
-      </div>
-
-      <aside id="modal" class="modal" style="display:none">
-        <div class="modal-wrapper js-modal-stop">
-          <button class="js-modal-close" id="closeButton">&times;</button>
-          <h1>Infos via API</h1>
-          <p id="Anneedesortie">Informations sur le film obtenues via l'API</p>
-        </div>
-      </aside>
+    </aside>
      
     <!-- END OF MAIN CONTAINER -->
 
