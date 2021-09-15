@@ -43,36 +43,39 @@ const indicators = document.querySelectorAll(".indicator");
 let baseSliderWidth = slider.offsetWidth;
 let activeIndex = 0; // the current page on the slider
 
-let movies = [
-  {src:"https://m.media-amazon.com/images/M/MV5BOWVmOWRmMWMtMDc2OC00NGM2LTllOTAtMmY5NjVhM2YzYjVlXkEyXkFqcGdeQXVyOTc2MTgwNjY@._V1_UY268_CR3,0,182,268_AL_.jpg",},
-  {src:"https://m.media-amazon.com/images/M/MV5BNjZhYWVhNjktNDRmNS00NGUyLThjZTgtYmU4NmQzYzIyZTk4XkEyXkFqcGdeQXVyMjkxNzQ1NDI@._V1_UY268_CR0,0,182,268_AL_.jpg"},
-  {src:"https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=674&q=80",},
-  {src:"https://images.unsplash.com/photo-1617182635496-c5c474367085?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80",},
-  {src:"https://images.unsplash.com/photo-1611419010196-a360856fc42f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=700&q=80",},
-  {src:"https://images.unsplash.com/photo-1528495612343-9ca9f4a4de28?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80",},
-  {src:"https://images.unsplash.com/photo-1518715303843-586e350765b2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",},
-];
-
 let films = [];
-let test = async function (url, index) {
+let getMoviesInfos = async function (url, index) {
   let response = await fetch(url);
   let data = await response.json();
   let imageUrl = await data.results[index].image_url;
-  films.push({src: await imageUrl});
-  return true
+  let apiId = await data.results[index].id;
+  let movieTitle = await data.results[index].title;
+  films.push({src: imageUrl, id:apiId, title:movieTitle});
+  return true;
+  // return array direct
 }
 
-
-console.log(movies);
+let movieDetails = [];
+async function getMovieDetails (id) {
+  let response = await fetch ("http://127.0.0.1:8000/api/v1/titles/"+id);
+  let data = await response.json();
+  movieDetails.push(data);
+  return true;
+}
+// let tableau = test ("http://127.0.0.1:8000/api/v1/titles/?sort_by=-imdb_score");
 
 // Fill the slider with all the movies in the "movies" array
 function populateSlider(movies) {
-  movies.forEach((image) => {
+  movies.forEach((movie) => {
     // Clone the initial movie thats included in the html, then replace the image with a different one
     const newMovie = document.getElementById("movie0");
     let clone = newMovie.cloneNode(true);
     let img = clone.querySelector("img");
-    img.src = image.src;
+    let h2 = clone.querySelector("h2");
+    img.src = movie.src;
+    img.setAttribute("onClick", "openModal("+movie.id+")");
+    h2.setAttribute("onClick", "openModal("+movie.id+")");
+    h2.textContent = movie.title;
 
     slider.insertBefore(clone, slider.childNodes[slider.childNodes.length - 1]);
   });
@@ -80,21 +83,20 @@ function populateSlider(movies) {
 
 async function init() {
   for (i=1; i<5; i++) {
-    testa = test ("http://127.0.0.1:8000/api/v1/titles/?sort_by=-imdb_score", i);
+    testa = await getMoviesInfos ("http://127.0.0.1:8000/api/v1/titles/?sort_by=-imdb_score", i);
   };
   for (i=0; i<3; i++){
-    testa = test ("http://127.0.0.1:8000/api/v1/titles/?sort_by=-imdb_score&page=2", i);
+    testa = await getMoviesInfos ("http://127.0.0.1:8000/api/v1/titles/?sort_by=-imdb_score&page=2", i);
   };
-  console.log(films);
-  populateSlider(movies);
+
+  populateSlider(films);
   // delete the initial movie in the html
   const initialMovie = document.getElementById("movie0");
   initialMovie.remove();
   return true;
 }
 
-init();
-
+document.getElementsByTagName("body").onload = init();
 
 // Update the indicators that show which page we're currently on
 function updateIndicators(index) {
@@ -129,7 +131,7 @@ btnRight.addEventListener("click", (e) => {
   // if we're on the last page
   if (activeIndex == 1) {
     // duplicate all the items in the slider (this is how we make 'looping' slider)
-    populateSlider();
+    populateSlider(films);
     slider.scrollBy({
       top: 0,
       left: +scrollDistance,
@@ -162,8 +164,11 @@ var closeButton = document.getElementById("closeButton");
 // When the user clicks the button, open the modal 
 let openModal = function (movie_id) {
     modal.style.display = null;
-    let element = document.getElementById("BestMovie");
-//    getMovieInfos (element.getAttribute('id_api'));
+    let title = modal.querySelector("h1");
+    data = getMovieDetails(movie_id);
+    console.log(movieDetails);
+    title.textContent = movie_id;
+
 }
 
 // When the user clicks on (x), close the modal

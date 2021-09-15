@@ -191,6 +191,7 @@ header {
 
 .description_title {
   padding: 10px;
+  word-wrap: break-word;
 }
 
 .description_title:hover {
