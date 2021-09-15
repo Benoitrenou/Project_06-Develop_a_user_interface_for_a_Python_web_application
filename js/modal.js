@@ -54,26 +54,16 @@ let movies = [
 ];
 
 let films = [];
-let test = function (url, index) {
-  let response = fetch(url);
-  let data = response.json();
-  let imageUrl = data.results[index].image_url;
-  films.push({src: imageUrl});
+let test = async function (url, index) {
+  let response = await fetch(url);
+  let data = await response.json();
+  let imageUrl = await data.results[index].image_url;
+  films.push({src: await imageUrl});
   return true
 }
-console.log(films);
+
 
 console.log(movies);
-
-
-async function init() {
-  for (i=1; i<5; i++) {
-    test ("http://127.0.0.1:8000/api/v1/titles/?sort_by=-imdb_score", i);
-  };
-  for (i=0; i<3; i++){
-    test ("http://127.0.0.1:8000/api/v1/titles/?sort_by=-imdb_score&page=2", i);
-  };
-}
 
 // Fill the slider with all the movies in the "movies" array
 function populateSlider(movies) {
@@ -87,13 +77,23 @@ function populateSlider(movies) {
     slider.insertBefore(clone, slider.childNodes[slider.childNodes.length - 1]);
   });
 }
-document.getElementsByTagName("body").onload = init();
-populateSlider(films);
 
-// delete the initial movie in the html
-const initialMovie = document.getElementById("movie0");
-initialMovie.remove();
+async function init() {
+  for (i=1; i<5; i++) {
+    testa = test ("http://127.0.0.1:8000/api/v1/titles/?sort_by=-imdb_score", i);
+  };
+  for (i=0; i<3; i++){
+    testa = test ("http://127.0.0.1:8000/api/v1/titles/?sort_by=-imdb_score&page=2", i);
+  };
+  console.log(films);
+  populateSlider(movies);
+  // delete the initial movie in the html
+  const initialMovie = document.getElementById("movie0");
+  initialMovie.remove();
+  return true;
+}
 
+init();
 
 
 // Update the indicators that show which page we're currently on
