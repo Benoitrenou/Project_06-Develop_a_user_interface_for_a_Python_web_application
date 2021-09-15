@@ -76,8 +76,8 @@ async function init() {
 }
 
 // Fill the slider with all the movies in the "movies" array
-function populateSlider() {
-  films.forEach((image) => {
+function populateSlider(movies) {
+  movies.forEach((image) => {
     // Clone the initial movie thats included in the html, then replace the image with a different one
     const newMovie = document.getElementById("movie0");
     let clone = newMovie.cloneNode(true);
@@ -88,7 +88,7 @@ function populateSlider() {
   });
 }
 document.getElementsByTagName("body").onload = init();
-populateSlider();
+populateSlider(films);
 
 // delete the initial movie in the html
 const initialMovie = document.getElementById("movie0");
