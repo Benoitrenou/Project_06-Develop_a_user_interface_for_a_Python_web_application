@@ -6,35 +6,15 @@ let getMainMovie = function () {
   })
   .then (function (value) {
     let imageUrl = value.results[0].image_url;
-    document.getElementById("bestMovie").setAttribute("src", imageUrl)
+    let id = value.results[0].id;
+    let title = value.results[0].title;
+    document.getElementById("bestMovie").setAttribute("src", imageUrl);
+    document.getElementById("bestMovie").setAttribute("onClick", "openModal("+id+")");
   })
 }
 getMainMovie();
 
 //SLIDER SECTION
-
-/*
-let url = 0;
-let test2 = function (url, index) {
-  fetch (url)
-  .then (function(res) {
-    if (res.ok) {return res.json();}
-  })
-  .then (function (value) {
-    console.log(value.results[index].image_url);
-    let url = value.results[index].image_url;
-    console.log(url);
-    return url
-  })
-  .then (function(url) {
-    document.getElementById("movie10").setAttribute("src", url)
-  })
-  .catch (function (err){
-    console.log(err)
-  })
-}
-*/
-
 const slider = document.querySelector(".slider");
 const btnLeft = document.getElementById("moveLeft");
 const btnRight = document.getElementById("moveRight");
@@ -54,15 +34,6 @@ let getMoviesInfos = async function (url, index) {
   return true;
   // return array direct
 }
-
-let movieDetails = [];
-async function getMovieDetails (id) {
-  let response = await fetch ("http://127.0.0.1:8000/api/v1/titles/"+id);
-  let data = await response.json();
-  movieDetails.push(data);
-  return true;
-}
-// let tableau = test ("http://127.0.0.1:8000/api/v1/titles/?sort_by=-imdb_score");
 
 // Fill the slider with all the movies in the "movies" array
 function populateSlider(movies) {
@@ -88,7 +59,6 @@ async function init() {
   for (i=0; i<3; i++){
     testa = await getMoviesInfos ("http://127.0.0.1:8000/api/v1/titles/?sort_by=-imdb_score&page=2", i);
   };
-
   populateSlider(films);
   // delete the initial movie in the html
   const initialMovie = document.getElementById("movie0");
@@ -152,6 +122,17 @@ btnRight.addEventListener("click", (e) => {
 
 
 //MODAL SECTION
+
+//Get movie's detailed informations
+let movieDetails = [];
+async function getMovieDetails (id) {
+  movieDetails.pop();
+  let response = await fetch ("http://127.0.0.1:8000/api/v1/titles/"+id);
+  let data = await response.json();
+  movieDetails.push(data);
+  return true;
+}
+
 // Get the modal
 var modal = document.getElementById("modal");
 
@@ -162,13 +143,21 @@ var btn = document.getElementById("button1");
 var closeButton = document.getElementById("closeButton");
 
 // When the user clicks the button, open the modal 
-let openModal = function (movie_id) {
+let openModal = async function (movie_id) {
     modal.style.display = null;
-    let title = modal.querySelector("h1");
-    data = getMovieDetails(movie_id);
+    await getMovieDetails(movie_id);
     console.log(movieDetails);
-    title.textContent = movie_id;
-
+    document.getElementById("modaltitle").textContent = movieDetails[0].title;
+    document.getElementById("year").textContent = "Année de sortie : "+movieDetails[0].year;
+    document.getElementById("rated").textContent = "Rated : "+movieDetails[0].rated;
+    document.getElementById("imdb_score").textContent = "Score IMDB : "+movieDetails[0].imdb_score;
+    document.getElementById("directors").textContent = "Réalisateur : "+movieDetails[0].directors;
+    document.getElementById("actors").textContent = "Acteurs : "+movieDetails[0].actors;
+    document.getElementById("duration").textContent = "Durée du film : "+movieDetails[0].duration+"min";
+    document.getElementById("countries").textContent = "Pays d'origine : "+movieDetails[0].countries;
+    document.getElementById("income").textContent = "Résultat Box-office : "+movieDetails[0].worldwide_gross_income;
+    document.getElementById("description").textContent = "Résumé : "+movieDetails[0].description;
+    document.getElementById("genres").textContent = "Genres : "+movieDetails[0].genres;
 }
 
 // When the user clicks on (x), close the modal
@@ -176,9 +165,9 @@ closeButton.onclick = function() {
     modal.style = "display:none";
   }
 
-// When the user clicks anywhere outside of the modal, close it
-//window.onclick = function(event) {
-//    if (event.target == modal) {
-//      modal.style = "display:none";
-//    }
-//}
+//When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style = "display:none";
+    }
+}
