@@ -12,7 +12,7 @@ let getMainMovie = function () {
     document.getElementById("bestMovie").setAttribute("onClick", "openModal("+id+")");
   })
 }
-getMainMovie();
+
 
 //SLIDER SECTION
 const slider = document.querySelector(".slider");
@@ -23,46 +23,70 @@ const indicators = document.querySelectorAll(".indicator");
 let baseSliderWidth = slider.offsetWidth;
 let activeIndex = 0; // the current page on the slider
 
-let films = [];
-let getMoviesInfos = async function (url, index) {
+//let films = [];
+let getMoviesInfos = async function (url, index, array) {
   let response = await fetch(url);
   let data = await response.json();
-  let imageUrl = await data.results[index].image_url;
-  let apiId = await data.results[index].id;
-  let movieTitle = await data.results[index].title;
-  films.push({src: imageUrl, id:apiId, title:movieTitle});
+  for (i=0; i<index; i++) {
+    imageUrl = data.results[i].image_url;
+    let apiId = data.results[i].id;
+    let movieTitle = data.results[i].title;
+    array.push({src: imageUrl, id:apiId, title:movieTitle});
+  }
   return true;
-  // return array direct
 }
 
-// Fill the slider with all the movies in the "movies" array
-function populateSlider(movies) {
+let createSlide = function (sliderId, movies) {
   movies.forEach((movie) => {
-    // Clone the initial movie thats included in the html, then replace the image with a different one
-    const newMovie = document.getElementById("movie0");
-    let clone = newMovie.cloneNode(true);
-    let img = clone.querySelector("img");
-    let h2 = clone.querySelector("h2");
-    img.src = movie.src;
-    img.setAttribute("onClick", "openModal("+movie.id+")");
-    h2.setAttribute("onClick", "openModal("+movie.id+")");
-    h2.textContent = movie.title;
+    let slider = document.getElementById(sliderId);
+    let movieDiv = document.createElement("div");
+    movieDiv.setAttribute("class", "movie");
+    slider.appendChild(movieDiv);
 
-    slider.insertBefore(clone, slider.childNodes[slider.childNodes.length - 1]);
-  });
+    let img = document.createElement("img");
+    img.setAttribute("src", movie.src);
+    img.setAttribute("class", "js-modal");
+    img.setAttribute("onClick", "openModal("+movie.id+")");
+    movieDiv.appendChild(img);
+
+    let description = document.createElement("div");
+    description.setAttribute("class", "description");
+    movieDiv.appendChild(description);
+
+    let descriptionTitle = document.createElement("div");
+    descriptionTitle.setAttribute("class", "description_title");
+    description.appendChild(descriptionTitle);
+
+    let title = document.createElement("h2");
+    descriptionTitle.appendChild(title);
+    title.setAttribute("onClick", "openModal("+movie.id+")");
+    title.setAttribute("class", "js-modal");
+    title.textContent = movie.title;
+  })
+  return true;
+}
+
+let loadBestsSlider = async function () {
+  let bestsArray = [];
+  await getMoviesInfos ("http://127.0.0.1:8000/api/v1/titles/?sort_by=-imdb_score", 5, bestsArray);
+  await getMoviesInfos ("http://127.0.0.1:8000/api/v1/titles/?sort_by=-imdb_score&page=2", 3, bestsArray);
+  bestsArray.splice(0, 1);
+  createSlide("bestMoviesSlider", bestsArray);
+}
+
+let loadCategSlider = async function(slider, genre) {
+  let categArray = [];
+  await getMoviesInfos ("http://127.0.0.1:8000/api/v1/titles/?genre="+genre+"&sort_by=-imdb_score", 5, categArray);
+  await getMoviesInfos ("http://127.0.0.1:8000/api/v1/titles/?genre="+genre+"&sort_by=-imdb_score&page=2", 2, categArray);
+  createSlide(slider, categArray);
 }
 
 async function init() {
-  for (i=1; i<5; i++) {
-    testa = await getMoviesInfos ("http://127.0.0.1:8000/api/v1/titles/?sort_by=-imdb_score", i);
-  };
-  for (i=0; i<3; i++){
-    testa = await getMoviesInfos ("http://127.0.0.1:8000/api/v1/titles/?sort_by=-imdb_score&page=2", i);
-  };
-  populateSlider(films);
-  // delete the initial movie in the html
-  const initialMovie = document.getElementById("movie0");
-  initialMovie.remove();
+  getMainMovie();
+  loadBestsSlider();
+  loadCategSlider("categ1Slider", "Western");
+  loadCategSlider("categ2Slider", "Fantasy");
+  loadCategSlider("categ3Slider", "Thriller");
   return true;
 }
 
@@ -73,35 +97,44 @@ function updateIndicators(index) {
   indicators.forEach((indicator) => {
     indicator.classList.remove("active");
   });
+  console.log(indicators);
   let newActiveIndicator = indicators[index];
   newActiveIndicator.classList.add("active");
 }
 
 // Scroll Left button
-btnLeft.addEventListener("click", (e) => {
+const scrollLeft = function() {
   let movieWidth = document.querySelector(".movie").getBoundingClientRect()
     .width;
   let scrollDistance = movieWidth * 6; // Scroll the length of 6 movies
-
   slider.scrollBy({
     top: 0,
     left: -scrollDistance,
     behavior: "smooth",
   });
-  activeIndex = (activeIndex - 1) % 3;
+  //activeIndex = (activeIndex - 1) % 1;
+  switch(activeIndex) {
+    case 0:
+      activeIndex=1;
+      break;
+    case 1:
+      activeIndex=0;
+      break;
+    default:
+      activeIndex=0;
+  }
   updateIndicators(activeIndex);
-});
+}
 
 // Scroll Right button
-btnRight.addEventListener("click", (e) => {
+const scrollRight = function() {
   let movieWidth = document.querySelector(".movie").getBoundingClientRect()
     .width;
   let scrollDistance = movieWidth * 6; // Scroll the length of 6 movies
 
   // if we're on the last page
   if (activeIndex == 1) {
-    // duplicate all the items in the slider (this is how we make 'looping' slider)
-    populateSlider(films);
+    createSlide("bestMoviesSlider", bestsArray);
     slider.scrollBy({
       top: 0,
       left: +scrollDistance,
@@ -118,19 +151,24 @@ btnRight.addEventListener("click", (e) => {
     activeIndex = (activeIndex + 1) % 3;
     updateIndicators(activeIndex);
   }
+}
+
+btnRight.addEventListener("click", (e) => {
+  scrollRight();  
+});
+
+btnLeft.addEventListener("click", (e) => {
+  scrollLeft();
 });
 
 
 //MODAL SECTION
 
 //Get movie's detailed informations
-let movieDetails = [];
 async function getMovieDetails (id) {
-  movieDetails.pop();
   let response = await fetch ("http://127.0.0.1:8000/api/v1/titles/"+id);
   let data = await response.json();
-  movieDetails.push(data);
-  return true;
+  return await data;
 }
 
 // Get the modal
@@ -145,24 +183,25 @@ var closeButton = document.getElementById("closeButton");
 // When the user clicks the button, open the modal 
 let openModal = async function (movie_id) {
     modal.style.display = null;
-    await getMovieDetails(movie_id);
-    console.log(movieDetails);
-    document.getElementById("modaltitle").textContent = movieDetails[0].title;
-    document.getElementById("year").textContent = "Année de sortie : "+movieDetails[0].year;
-    document.getElementById("rated").textContent = "Rated : "+movieDetails[0].rated;
-    document.getElementById("imdb_score").textContent = "Score IMDB : "+movieDetails[0].imdb_score;
-    document.getElementById("directors").textContent = "Réalisateur : "+movieDetails[0].directors;
-    document.getElementById("actors").textContent = "Acteurs : "+movieDetails[0].actors;
-    document.getElementById("duration").textContent = "Durée du film : "+movieDetails[0].duration+"min";
-    document.getElementById("countries").textContent = "Pays d'origine : "+movieDetails[0].countries;
-    document.getElementById("income").textContent = "Résultat Box-office : "+movieDetails[0].worldwide_gross_income;
-    document.getElementById("description").textContent = "Résumé : "+movieDetails[0].description;
-    document.getElementById("genres").textContent = "Genres : "+movieDetails[0].genres;
+    let movie = await getMovieDetails(movie_id);
+    document.getElementById("modaltitle").textContent = movie.title;
+    let img = document.getElementById("modalImage");
+    img.setAttribute("src", movie.image_url);
+    document.getElementById("year").textContent = "Année de sortie : "+movie.year;
+    document.getElementById("rated").textContent = "Rated : "+movie.rated;
+    document.getElementById("imdb_score").textContent = "Score IMDB : "+movie.imdb_score;
+    document.getElementById("directors").textContent = "Réalisateur : "+movie.directors;
+    document.getElementById("actors").textContent = "Acteurs : "+movie.actors;
+    document.getElementById("duration").textContent = "Durée du film : "+movie.duration+"min";
+    document.getElementById("countries").textContent = "Pays d'origine : "+movie.countries;
+    document.getElementById("income").textContent = "Résultat Box-office : "+movie.worldwide_gross_income;
+    document.getElementById("description").textContent = "Résumé : "+movie.description;
+    document.getElementById("genres").textContent = "Genres : "+movie.genres;
 }
 
 // When the user clicks on (x), close the modal
 closeButton.onclick = function() {
-    modal.style = "display:none";
+    modal.style = "display:none"
   }
 
 //When the user clicks anywhere outside of the modal, close it
@@ -171,3 +210,4 @@ window.onclick = function(event) {
       modal.style = "display:none";
     }
 }
+

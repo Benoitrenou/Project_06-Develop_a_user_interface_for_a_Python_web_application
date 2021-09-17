@@ -31,7 +31,8 @@ img {
 }
 
 h1 {
-  padding-top: 60px;  
+  padding-top: 60px;
+  padding-left: 50px
 }
 
 .wrapper {
@@ -51,7 +52,8 @@ header {
    "nt mn mn sb . . . "; 
   background-color: var(--primary);
   width: 100%;
-  margin-bottom: 0px;  
+  margin-bottom: 0px;
+  z-index:3; 
 }
 
 .netflixLogo {
@@ -105,9 +107,8 @@ header {
 }
 
 /* MAIN CONTAINER */
-.main-container {
-  padding: 50px;
-}
+/*.main-container {
+}*/
 
 /* SLIDER CONTAINER */
 .slider {
@@ -120,7 +121,7 @@ header {
   padding-bottom: 300px;
 }
 
-/* SLIDER INDICATORS */
+/* SLIDER INDICATORS  */
 .container-indicators {
   width: 100px;
   position: absolute; 
@@ -140,6 +141,7 @@ header {
   background-color: white;
 }
 
+
 /* MOVIE ELEMNTS */
 .movie {
   width: var(--movie-width);
@@ -157,7 +159,7 @@ header {
   margin-left: var(--arrow-width);
 }
 
-.movie img {
+.movie img {  
   object-fit: cover;
   height: 100%;
   width: 100%;
@@ -170,6 +172,7 @@ header {
   z-index: 9999;
   background-color: #272727;
   width: var(--movie-width);
+  max-width: (var(--movie-width));
   margin-top: -10px;
   padding: 10px 0;
   border-bottom-left-radius: 10px;
@@ -191,7 +194,7 @@ header {
 
 .description_title {
   padding: 10px;
-  word-wrap: break-word;
+  white-space: initial;
 }
 
 .description_title:hover {
@@ -268,13 +271,14 @@ footer {
   align-items: center;
   justify-content: center;
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 3; /* Sit on top */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
   background: rgba(0,0,0,0.8); /* Black w/ opacity */
+  overflow-y: hidden;
 }
 
 /* Modal Content/Box */

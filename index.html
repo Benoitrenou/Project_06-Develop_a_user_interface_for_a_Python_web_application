@@ -15,7 +15,7 @@
       <nav class="main-nav">                
         <a href="#home">Accueil</a>
         <a href="#meilleursfilms">Meilleurs Films</a>
-        <a href="#western">Western</a>
+        <a href="#categ1">Western</a>
         <a href="#categ2">Catégorie 2</a>
         <a href="#categ3">Catégorie 3</a>
       </nav>
@@ -26,32 +26,52 @@
     <!-- END OF HEADER -->
     
     <!-- MAIN CONTAINER -->
-    <section class="main-container" >
+    <section class="container" >
+      <h1>Meilleur film</h1>
       <div class="location" id="home">
-          <h1 id="home">Meilleur film IMDB</h1>
-          <div class="box">
-            <button onClick="openModal('')" class="js-modal swiper-slide"> <img id="bestMovie" id_api = "" src=""></button>       
+          <div class="movie">
+            <img id="bestMovie" class= "js-modal">  
           </div>
       </div>
     </section>
     
     <div id ="meilleursfilms" class="container">
       <h1>Meilleurs Films</h1>
-      <button type="button" id="moveLeft" class="btn-nav"> ᐊ </button>
-      <div class="container-indicators">
+      <button type="button" id="moveLeft" class="btn-nav"> ᐊ </button>      <div class="container-indicators">
         <div class="indicator active" data-index=0></div>
         <div class="indicator" data-index=1></div>
       </div>
-      <div class="slider" id="mySlider">
-        <div class="movie" id="movie0">
-          <img src="" alt="" srcset="" onClick="" class="js-modal swiper-slide">
-          <div class="description">
-            <div class="description_title">
-              <h2 id="movie_title" onClick="openModal('')" class="js-modal swiper-slide"> </h2>
-            </div>
-          </div>
-        </div>
+      <div class="slider" id="bestMoviesSlider"> </div>
+      <button type="button" id="moveRight" class="btn-nav"> ᐅ </button>
+    </div>
+
+    <div id ="categ1" class="container">
+      <h1>Meilleurs Westerns</h1>
+      <button type="button" id="moveLeft" class="btn-nav"> ᐊ </button>      <div class="container-indicators">
+        <div class="indicator active" data-index=0></div>
+        <div class="indicator" data-index=1></div>
       </div>
+      <div class="slider" id="categ1Slider"> </div>
+      <button type="button" id="moveRight" class="btn-nav"> ᐅ </button>
+    </div>
+
+    <div id ="categ2" class="container">
+      <h1>Meilleurs Romances</h1>
+      <button type="button" id="moveLeft" class="btn-nav"> ᐊ </button>      <div class="container-indicators">
+        <div class="indicator active" data-index=0></div>
+        <div class="indicator" data-index=1></div>
+      </div>
+      <div class="slider" id="categ2Slider"> </div>
+      <button type="button" id="moveRight" class="btn-nav"> ᐅ </button>
+    </div>
+
+    <div id ="categ3" class="container">
+      <h1>Meilleurs Drames</h1>
+      <button type="button" id="moveLeft" class="btn-nav"> ᐊ </button>      <div class="container-indicators">
+        <div class="indicator active" data-index=0></div>
+        <div class="indicator" data-index=1></div>
+      </div>
+      <div class="slider" id="categ3Slider"> </div>
       <button type="button" id="moveRight" class="btn-nav"> ᐅ </button>
     </div>
 
@@ -59,6 +79,7 @@
       <div class="modal-wrapper js-modal-stop">
         <button class="js-modal-close" id="closeButton">&times;</button>
         <h1 id="modaltitle"></h1>
+        <img id="modalImage">
         <p id="genres"></p>
         <p id="year"></p>
         <p id="rated"></p>
