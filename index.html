@@ -10,14 +10,15 @@
     <!-- HEADER -->
     <header>
       <div class="netflixLogo">
-        <a id="logo" href="#home"><img src="https://github.com/carlosavilae/Netflix-Clone/blob/master/img/logo.PNG?raw=true" alt="Logo Image"></a>
+        <h1 id="juststreamit" class="logo">Just Stream It</h1>
+        <!-- <a id="logo" href="#home"><img src="https://github.com/carlosavilae/Netflix-Clone/blob/master/img/logo.PNG?raw=true" alt="Logo Image"></a> -->
       </div>      
       <nav class="main-nav">                
         <a href="#home">Accueil</a>
         <a href="#meilleursfilms">Meilleurs Films</a>
         <a href="#categ1">Western</a>
-        <a href="#categ2">Catégorie 2</a>
-        <a href="#categ3">Catégorie 3</a>
+        <a href="#categ2">Films Historiques</a>
+        <a href="#categ3">Thrillers</a>
       </nav>
       <nav class="sub-nav">
         <a href="#">Compte Perso</a>        
@@ -28,51 +29,53 @@
     <!-- MAIN CONTAINER -->
     <section class="container" >
       <h1>Meilleur film</h1>
-      <div class="location" id="home">
-          <div class="movie">
-            <img id="bestMovie" class= "js-modal">  
-          </div>
-      </div>
+        <div class="movie mainmovie" id="landing">
+          <img id="bestMovie" class= "js-modal">
+        </div>
     </section>
     
     <div id ="meilleursfilms" class="container">
       <h1>Meilleurs Films</h1>
-      <button type="button" id="moveLeft" class="btn-nav"> ᐊ </button>      <div class="container-indicators">
-        <div class="indicator active" data-index=0></div>
-        <div class="indicator" data-index=1></div>
+      <button type="button" id="moveLeft0" class="btn-nav left"> ᐊ </button>      
+      <div class="container-indicators">
+        <div class="indicator indic0 active" data-index=0></div>
+        <div class="indicator indic0" data-index=1></div>
       </div>
       <div class="slider" id="bestMoviesSlider"> </div>
-      <button type="button" id="moveRight" class="btn-nav"> ᐅ </button>
+      <button type="button" id="moveRight0" class="btn-nav right"> ᐅ </button>
     </div>
 
     <div id ="categ1" class="container">
       <h1>Meilleurs Westerns</h1>
-      <button type="button" id="moveLeft" class="btn-nav"> ᐊ </button>      <div class="container-indicators">
-        <div class="indicator active" data-index=0></div>
-        <div class="indicator" data-index=1></div>
+      <button type="button" id="moveLeft1" class="btn-nav left"> ᐊ </button>      
+      <div class="container-indicators">
+        <div class="indicator indic1 active" data-index=0></div>
+        <div class="indicator indic1" data-index=1></div>
       </div>
       <div class="slider" id="categ1Slider"> </div>
-      <button type="button" id="moveRight" class="btn-nav"> ᐅ </button>
+      <button type="button" id="moveRight1" class="btn-nav right"> ᐅ </button>
     </div>
 
     <div id ="categ2" class="container">
-      <h1>Meilleurs Romances</h1>
-      <button type="button" id="moveLeft" class="btn-nav"> ᐊ </button>      <div class="container-indicators">
-        <div class="indicator active" data-index=0></div>
-        <div class="indicator" data-index=1></div>
+      <h1>Meilleurs Films Historiques</h1>
+      <button type="button" id="moveLeft2" class="btn-nav left"> ᐊ </button>      
+      <div class="container-indicators">
+        <div class="indicator indic2 active" data-index=0></div>
+        <div class="indicator indic2" data-index=1></div>
       </div>
       <div class="slider" id="categ2Slider"> </div>
-      <button type="button" id="moveRight" class="btn-nav"> ᐅ </button>
+      <button type="button" id="moveRight2" class="btn-nav right"> ᐅ </button>
     </div>
 
     <div id ="categ3" class="container">
-      <h1>Meilleurs Drames</h1>
-      <button type="button" id="moveLeft" class="btn-nav"> ᐊ </button>      <div class="container-indicators">
-        <div class="indicator active" data-index=0></div>
-        <div class="indicator" data-index=1></div>
+      <h1>Meilleurs Thrillers</h1>
+      <button type="button" id="moveLeft3" class="btn-nav left"> ᐊ </button>      
+      <div class="container-indicators">
+        <div class="indicator indic3 active" data-index=0></div>
+        <div class="indicator indic3" data-index=1></div>
       </div>
       <div class="slider" id="categ3Slider"> </div>
-      <button type="button" id="moveRight" class="btn-nav"> ᐅ </button>
+      <button type="button" id="moveRight3" class="btn-nav right"> ᐅ </button>
     </div>
 
     <aside id="modal" class="modal" style="display:none">
@@ -99,10 +102,10 @@
     <section class="link">
       <div class="sub-links">
         <ul>
-          <li><a href="#">Audio and Subtitles</a></li>
-          <li><a href="#">Audio Description</a></li>
-          <li><a href="#">Help Center</a></li>
-          <li><a href="#">Gift Cards</a></li>
+          <li><a href="#">Mentions Légales</a></li>
+          <li><a href="mailto:benoit.renou@gmail.com">Nous contacter</a></li>
+          <li><a href="mailto:hello@openclassrooms.com">Centre d'aide</a></li>
+          <li><a href="#">Plan du site</a></li>
         </ul>
       </div>
     </section>
