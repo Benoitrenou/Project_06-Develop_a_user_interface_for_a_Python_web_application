@@ -9,7 +9,7 @@
 
     <!-- HEADER -->
     <header>
-      <div class="netflixLogo">
+      <div class="containerlogo">
         <h1 id="juststreamit" class="logo">Just Stream It</h1>
         <!-- <a id="logo" href="#home"><img src="https://github.com/carlosavilae/Netflix-Clone/blob/master/img/logo.PNG?raw=true" alt="Logo Image"></a> -->
       </div>      
@@ -27,9 +27,14 @@
     <!-- END OF HEADER -->
     
     <!-- MAIN CONTAINER -->
-    <section class="container" >
-      <h1>Meilleur film</h1>
-        <div class="movie mainmovie" id="landing">
+    <section id="home" class="container maincontainer" >
+      <h1>Meilleur film IMDB</h1>
+        <div class="mainmovie" id="landing">
+          <div class="maindesc">
+            <h1 id="besttitle" class="description_title">Titre du film</h1>
+            <h2 id="bestnote"> </h2>
+            <button id="bestinfos"> Infos </button>
+          </div>
           <img id="bestMovie" class= "js-modal">
         </div>
     </section>
@@ -80,7 +85,10 @@
 
     <aside id="modal" class="modal" style="display:none">
       <div class="modal-wrapper js-modal-stop">
-        <button class="js-modal-close" id="closeButton">&times;</button>
+        <svg viewBox="0 0 24 24" class="js-modal-close" id="closeButton" tabindex="0">
+          <path d="M12 10.586l7.293-7.293 1.414 1.414L13.414 12l7.293 7.293-1.414 1.414L12 13.414l-7.293 7.293-1.414-1.414L10.586 12 3.293 4.707l1.414-1.414L12 10.586z" fill="currentColor"></path>
+        </svg>
+        <!-- <button class="js-modal-close" >&times;</button> -->
         <h1 id="modaltitle"></h1>
         <img id="modalImage">
         <p id="genres"></p>

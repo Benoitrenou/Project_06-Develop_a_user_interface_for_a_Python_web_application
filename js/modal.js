@@ -8,8 +8,13 @@ let getMainMovie = function () {
     let imageUrl = value.results[0].image_url;
     let id = value.results[0].id;
     let title = value.results[0].title;
+    let note = value.results[0].imdb_score;
     document.getElementById("bestMovie").setAttribute("src", imageUrl);
     document.getElementById("bestMovie").setAttribute("onClick", "openModal("+id+")");
+    document.getElementById("besttitle").setAttribute("onClick", "openModal("+id+")");
+    document.getElementById("besttitle").textContent = title;
+    document.getElementById("bestnote").textContent = "Note IMDB : "+note;
+    document.getElementById("bestinfos").setAttribute("onClick", "openModal("+id+")")
   })
 }
 
@@ -39,7 +44,7 @@ function updateIndicators(index, indicators) {
 const scrollLeft = function(slider, indicators) {
   let movieWidth = document.querySelector(".movie").getBoundingClientRect()
     .width;
-  let scrollDistance = movieWidth * 3; // Scroll the length of 6 movies
+  let scrollDistance = movieWidth * 2; // Scroll the length of 6 movies
   slider.scrollBy({
     top: 0,
     left: -scrollDistance,
@@ -62,7 +67,7 @@ const scrollLeft = function(slider, indicators) {
 const scrollRight = function(slider, sliderId, array, indicators) {
   let movieWidth = document.querySelector(".movie").getBoundingClientRect()
     .width;
-  let scrollDistance = movieWidth * 3; // Scroll the length of 6 movies
+  let scrollDistance = movieWidth * 2; // Scroll the length of 6 movies
 
   // if we're on the last page
   if (activeIndex == 1) {
@@ -188,20 +193,27 @@ var closeButton = document.getElementById("closeButton");
 // When the user clicks the button, open the modal 
 let openModal = async function (movie_id) {
     modal.style.display = null;
+    //document.body.style.overflowY = "hidden";    
     let movie = await getMovieDetails(movie_id);
     document.getElementById("modaltitle").textContent = movie.title;
     let img = document.getElementById("modalImage");
     img.setAttribute("src", movie.image_url);
+    document.getElementById("genres").textContent = "Genres : "+movie.genres;
     document.getElementById("year").textContent = "Année de sortie : "+movie.year;
-    document.getElementById("rated").textContent = "Rated : "+movie.rated;
+    if (movie.rated = "Not rated or unkown rating") {
+      document.getElementById("rated").textContent = "Rated : -" 
+    } else {
+      document.getElementById("rated").textContent = "Rated : "+movie.rated;}
     document.getElementById("imdb_score").textContent = "Score IMDB : "+movie.imdb_score;
     document.getElementById("directors").textContent = "Réalisateur : "+movie.directors;
     document.getElementById("actors").textContent = "Acteurs : "+movie.actors;
     document.getElementById("duration").textContent = "Durée du film : "+movie.duration+"min";
     document.getElementById("countries").textContent = "Pays d'origine : "+movie.countries;
-    document.getElementById("income").textContent = "Résultat Box-office : "+movie.worldwide_gross_income;
+    if (!movie.worldwide_gross_income) {
+      document.getElementById("income").textContent = "Résultat Box-office : -"
+    } else {
+      document.getElementById("income").textContent = "Résultat Box-office : "+movie.worldwide_gross_income+" $";}
     document.getElementById("description").textContent = "Résumé : "+movie.description;
-    document.getElementById("genres").textContent = "Genres : "+movie.genres;
 }
 
 // When the user clicks on (x), close the modal
