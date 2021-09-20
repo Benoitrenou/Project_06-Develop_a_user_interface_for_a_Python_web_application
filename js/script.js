@@ -23,8 +23,18 @@ let getMainMovie = function () {
       document
         .getElementById("bestinfos")
         .setAttribute("onClick", "openModal(" + id + ")");
+        console.log(id);
+      fetch("http://127.0.0.1:8000/api/v1/titles/"+id)
+        .then(function (res) {
+          if (res.ok) {
+            return res.json();
+          }
+        })
+        .then(function (value) {
+          document.getElementById("bestdescription").textContent = value.description;
+        })
     });
-};
+}
 
 //SLIDER SECTION
 
