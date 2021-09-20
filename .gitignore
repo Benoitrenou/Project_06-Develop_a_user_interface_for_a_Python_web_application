@@ -1,5 +1,5 @@
 OCMovies*
 style2.css
 .gitignore
-main.js
-script2.js
+./js/main.js
+./js/script2.js
