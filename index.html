@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="fr">
 <head>
   <meta charset="utf-8" />
   <title>Just Stream It</title>
@@ -16,7 +17,7 @@
       <nav class="main-nav">                
         <a href="#home">Accueil</a>
         <a href="#meilleursfilms">Meilleurs Films</a>
-        <a href="#categ1">Western</a>
+        <a href="#categ1">Westerns</a>
         <a href="#categ2">Films Historiques</a>
         <a href="#categ3">Thrillers</a>
       </nav>
@@ -27,15 +28,15 @@
     <!-- END OF HEADER -->
     
     <!-- MAIN CONTAINER -->
-    <section id="home" class="container maincontainer" >
+    <section id="home" class="container maincontainer">
       <h1>Meilleur film IMDB</h1>
         <div class="mainmovie" id="landing">
           <div class="maindesc">
             <h1 id="besttitle" class="description_title">Titre du film</h1>
-            <h2 id="bestnote"> </h2>
+            <h2 id="bestnote">Note du film</h2>
             <button id="bestinfos"> Infos </button>
           </div>
-          <img id="bestMovie" class= "js-modal">
+          <img id="bestMovie" class= "js-modal" src="." alt="Picture of best movie">
         </div>
     </section>
     
@@ -89,8 +90,8 @@
           <path d="M12 10.586l7.293-7.293 1.414 1.414L13.414 12l7.293 7.293-1.414 1.414L12 13.414l-7.293 7.293-1.414-1.414L10.586 12 3.293 4.707l1.414-1.414L12 10.586z" fill="currentColor"></path>
         </svg>
         <!-- <button class="js-modal-close" >&times;</button> -->
-        <h1 id="modaltitle"></h1>
-        <img id="modalImage">
+        <h1 id="modaltitle">Titre du film</h1>
+        <img id="modalImage" src="." alt="Affiche du film">
         <p id="genres"></p>
         <p id="year"></p>
         <p id="rated"></p>
@@ -107,7 +108,7 @@
     <!-- END OF MAIN CONTAINER -->
 
     <!-- LINKS -->
-    <section class="link">
+    <div class="link">
       <div class="sub-links">
         <ul>
           <li><a href="#">Mentions Légales</a></li>
@@ -116,12 +117,12 @@
           <li><a href="#">Plan du site</a></li>
         </ul>
       </div>
-    </section>
+    </div>
     <!-- END OF LINKS -->
 
     <!-- FOOTER -->
     <footer>
-      <p>&copy Netflix, Inc.</p>
+      <p>&copy; Netflix, Inc.</p>
       <p>Benoit Renou - 2021 </p>
       <p>Copy pour OpenClassRooms</p>
     </footer>
