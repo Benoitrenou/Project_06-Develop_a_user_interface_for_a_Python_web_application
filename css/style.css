@@ -303,9 +303,8 @@ header {
   outline: none;
   border: none;
   color: white;
-  top: 112;
+  top: 112px;  
   z-index: 5;
-  visibility: hidden;
 }
 
 .btn-nav:hover {
