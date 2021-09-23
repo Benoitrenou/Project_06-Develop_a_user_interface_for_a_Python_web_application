@@ -11,9 +11,9 @@ let getMainMovie = function () {
       let id = value.results[0].id;
       let title = value.results[0].title;
       let note = value.results[0].imdb_score;
-      document.getElementById("bestMovie").setAttribute("src", imageUrl);
+      document.getElementById("mainMovieImg").setAttribute("src", imageUrl);
       document
-        .getElementById("bestMovie")
+        .getElementById("mainMovieImg")
         .setAttribute("onClick", "openModal(" + id + ")");
       document
         .getElementById("besttitle")
@@ -23,7 +23,6 @@ let getMainMovie = function () {
       document
         .getElementById("bestinfos")
         .setAttribute("onClick", "openModal(" + id + ")");
-        console.log(id);
       fetch("http://127.0.0.1:8000/api/v1/titles/"+id)
         .then(function (res) {
           if (res.ok) {
@@ -31,7 +30,7 @@ let getMainMovie = function () {
           }
         })
         .then(function (value) {
-          document.getElementById("bestdescription").textContent = value.description;
+          document.getElementById("bestsynopsis").textContent = value.description;
         })
     });
 }
@@ -50,10 +49,10 @@ let activeIndex = 0; // the current page on the slider
 // Update the indicators that show which page we're currently on
 function updateIndicators(index, indicators) {
   indicators.forEach((indicator) => {
-    indicator.classList.remove("active");
+    indicator.classList.remove("indicator--active");
   });
   let newActiveIndicator = indicators[index];
-  newActiveIndicator.classList.add("active");
+  newActiveIndicator.classList.add("indicator--active");
 }
 
 // Scroll Left button function
@@ -129,7 +128,6 @@ let createSlide = function (sliderId, movies) {
 
     let img = document.createElement("img");
     img.setAttribute("src", movie.src);
-    img.setAttribute("class", "js-modal");
     img.setAttribute("onClick", "openModal(" + movie.id + ")");
     movieDiv.appendChild(img);
 
@@ -138,13 +136,12 @@ let createSlide = function (sliderId, movies) {
     movieDiv.appendChild(description);
 
     let descriptionTitle = document.createElement("div");
-    descriptionTitle.setAttribute("class", "description_title");
+    descriptionTitle.setAttribute("class", "description__title");
     description.appendChild(descriptionTitle);
 
     let title = document.createElement("h2");
     descriptionTitle.appendChild(title);
     title.setAttribute("onClick", "openModal(" + movie.id + ")");
-    title.setAttribute("class", "js-modal");
     title.textContent = movie.title;
   });
   return true;
@@ -233,33 +230,33 @@ let openModal = async function (movie_id) {
   modal.style.display = null;
   //document.body.style.overflowY = "hidden";
   let movie = await getMovieDetails(movie_id);
-  document.getElementById("modaltitle").textContent = movie.title;
-  let img = document.getElementById("modalImage");
+  document.getElementById("modal__title").textContent = movie.title;
+  let img = document.getElementById("modal__image");
   img.setAttribute("src", movie.image_url);
-  document.getElementById("genres").textContent = "Genres : " + movie.genres;
-  document.getElementById("year").textContent =
+  document.getElementById("modal__genres").textContent = "Genres : " + movie.genres;
+  document.getElementById("modal__year").textContent =
     "Année de sortie : " + movie.year;
   if ((movie.rated = "Not rated or unkown rating")) {
-    document.getElementById("rated").textContent = "Rated : -";
+    document.getElementById("modal__rated").textContent = "Rated : -";
   } else {
-    document.getElementById("rated").textContent = "Rated : " + movie.rated;
+    document.getElementById("modal__rated").textContent = "Rated : " + movie.rated;
   }
-  document.getElementById("imdb_score").textContent =
+  document.getElementById("modal__imdb_score").textContent =
     "Score IMDB : " + movie.imdb_score;
-  document.getElementById("directors").textContent =
+  document.getElementById("modal__directors").textContent =
     "Réalisateur : " + movie.directors;
-  document.getElementById("actors").textContent = "Acteurs : " + movie.actors;
-  document.getElementById("duration").textContent =
+  document.getElementById("modal__actors").textContent = "Acteurs : " + movie.actors;
+  document.getElementById("modal__duration").textContent =
     "Durée du film : " + movie.duration + "min";
-  document.getElementById("countries").textContent =
+  document.getElementById("modal__countries").textContent =
     "Pays d'origine : " + movie.countries;
   if (!movie.worldwide_gross_income) {
-    document.getElementById("income").textContent = "Résultat Box-office : -";
+    document.getElementById("modal__income").textContent = "Résultat Box-office : -";
   } else {
-    document.getElementById("income").textContent =
+    document.getElementById("modal__income").textContent =
       "Résultat Box-office : " + movie.worldwide_gross_income + " $";
   }
-  document.getElementById("description").textContent =
+  document.getElementById("modal__description").textContent =
     "Résumé : " + movie.description;
 };
 

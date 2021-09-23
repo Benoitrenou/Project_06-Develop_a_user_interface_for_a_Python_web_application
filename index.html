@@ -5,14 +5,13 @@
   <title>Just Stream It</title>
   <link rel="stylesheet" href="./css/style.css" />
 </head>
+
 <body>
   <div class="wrapper">
-
     <!-- HEADER -->
     <header>
-      <div class="containerlogo">
-        <h1 id="juststreamit" class="logo">Just Stream It</h1>
-        <!-- <a id="logo" href="#home"><img src="https://github.com/carlosavilae/Netflix-Clone/blob/master/img/logo.PNG?raw=true" alt="Logo Image"></a> -->
+      <div class="logo">
+        <h1 id="juststreamit">Just Stream It</h1>
       </div>      
       <nav class="main-nav">                
         <a href="#home">Accueil</a>
@@ -21,31 +20,31 @@
         <a href="#categ2">Films Historiques</a>
         <a href="#categ3">Thrillers</a>
       </nav>
-      <nav class="sub-nav">
+      <nav class="main-nav--account">
         <a href="#">Compte Perso</a>        
       </nav>      
     </header>
     <!-- END OF HEADER -->
     
     <!-- MAIN CONTAINER -->
-    <div id="home" class="container maincontainer">
+    <div id="home" class="container--main">
       <h1>Meilleur film IMDB</h1>
-        <div class="mainmovie" id="landing">
+        <div class="mainmovie">
           <div class="maindesc">
-            <h1 id="besttitle" class="description_title">Titre du film</h1>
+            <h1 id="besttitle" class="description__title description__title--best">Titre du film</h1>
             <h2 id="bestnote">Note du film</h2>
             <button id="bestinfos"> Infos </button>
-            <p id="bestdescription"></p>
+            <p id="bestsynopsis"></p>
           </div>
-          <img id="bestMovie" class= "js-modal" src="." alt="Picture of best movie">
+          <img id="mainMovieImg" src="." alt="Picture of best movie">
         </div>
       </div>
     
     <div id ="meilleursfilms" class="container">
       <h1>Meilleurs Films</h1>
       <button type="button" id="moveLeft0" class="btn-nav left"> ᐊ </button>      
-      <div class="container-indicators">
-        <div class="indicator indic0 active" data-index=0></div>
+      <div class="container__indicators">
+        <div class="indicator indic0 indicator--active" data-index=0></div>
         <div class="indicator indic0" data-index=1></div>
       </div>
       <div class="slider" id="bestMoviesSlider"> </div>
@@ -55,8 +54,8 @@
     <div id ="categ1" class="container">
       <h1>Meilleurs Westerns</h1>
       <button type="button" id="moveLeft1" class="btn-nav left"> ᐊ </button>      
-      <div class="container-indicators">
-        <div class="indicator indic1 active" data-index=0></div>
+      <div class="container__indicators">
+        <div class="indicator indic1 indicator--active" data-index=0></div>
         <div class="indicator indic1" data-index=1></div>
       </div>
       <div class="slider" id="categ1Slider"> </div>
@@ -66,8 +65,8 @@
     <div id ="categ2" class="container">
       <h1>Meilleurs Films Historiques</h1>
       <button type="button" id="moveLeft2" class="btn-nav left"> ᐊ </button>      
-      <div class="container-indicators">
-        <div class="indicator indic2 active" data-index=0></div>
+      <div class="container__indicators">
+        <div class="indicator indic2 indicator--active" data-index=0></div>
         <div class="indicator indic2" data-index=1></div>
       </div>
       <div class="slider" id="categ2Slider"> </div>
@@ -77,8 +76,8 @@
     <div id ="categ3" class="container">
       <h1>Meilleurs Thrillers</h1>
       <button type="button" id="moveLeft3" class="btn-nav left"> ᐊ </button>      
-      <div class="container-indicators">
-        <div class="indicator indic3 active" data-index=0></div>
+      <div class="container__indicators">
+        <div class="indicator indic3 indicator--active" data-index=0></div>
         <div class="indicator indic3" data-index=1></div>
       </div>
       <div class="slider" id="categ3Slider"> </div>
@@ -86,44 +85,43 @@
     </div>
 
     <aside id="modal" class="modal" style="display:none">
-      <div class="modal-wrapper js-modal-stop">
-        <svg viewBox="0 0 24 24" class="js-modal-close" id="closeButton" tabindex="0">
+      <div class="modal__wrapper">
+        <svg class="modal__close-button" id="closeButton">
           <path d="M12 10.586l7.293-7.293 1.414 1.414L13.414 12l7.293 7.293-1.414 1.414L12 13.414l-7.293 7.293-1.414-1.414L10.586 12 3.293 4.707l1.414-1.414L12 10.586z" fill="currentColor"></path>
         </svg>
-        <!-- <button class="js-modal-close" >&times;</button> -->
-        <h2 id="modaltitle">Titre du film</h2>
-        <img id="modalImage" src="." alt="Affiche du film">
-        <p id="genres"></p>
-        <p id="year"></p>
-        <p id="rated"></p>
-        <p id="imdb_score"></p>
-        <p id="directors"></p>
-        <p id="actors"></p>
-        <p id="duration"></p>
-        <p id="countries"></p>
-        <p id="income"></p>
-        <p id="description"></p>
+        <h2 id="modal__title">Titre du film</h2>
+        <img id="modal__image" src="." alt="Affiche du film">
+        <p id="modal__genres"></p>
+        <p id="modal__year"></p>
+        <p id="modal__rated"></p>
+        <p id="modal__imdb_score"></p>
+        <p id="modal__directors"></p>
+        <p id="modal__actors"></p>
+        <p id="modal__duration"></p>
+        <p id="modal__countries"></p>
+        <p id="modal__income"></p>
+        <p id="modal__description"></p>
       </div>
     </aside>
-     
     <!-- END OF MAIN CONTAINER -->
 
-    <!-- LINKS -->
-    <div class="link">
-      <div class="sub-links">
-        <ul>
-          <li><a href="#">Mentions Légales</a></li>
-          <li><a href="mailto:benoit.renou@gmail.com">Nous contacter</a></li>
-          <li><a href="mailto:hello@openclassrooms.com">Centre d'aide</a></li>
-          <li><a href="#">Plan du site</a></li>
-        </ul>
-      </div>
-    </div>
-    <!-- END OF LINKS -->
+    
 
     <!-- FOOTER -->
     <footer>
-      <p>&copy; Netflix, Inc.</p>
+        <!-- LINKS -->
+      <div class="link">
+        <div class="sub-links">
+          <ul>
+            <li><a href="#">Mentions Légales</a></li>
+            <li><a href="mailto:benoit.renou@gmail.com">Nous contacter</a></li>
+            <li><a href="mailto:hello@openclassrooms.com">Centre d'aide</a></li>
+            <li><a href="#">Plan du site</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- END OF LINKS -->
+      <p>&copy; NoteFlix, Inc.</p>
       <p>Benoit Renou - 2021 </p>
       <p>Copy pour OpenClassRooms</p>
     </footer>
