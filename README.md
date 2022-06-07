@@ -1,16 +1,23 @@
-Afin de faire fonctionner ces scripts, veuillez suivre les étapes suivantes
+The main goal in the scenario of this project is to create a website which will present best movies according to IMDB database.
+The movies data will be retrieve by requests to an API which already exists. The design of the website must be inspired from Netflix design.
 
-Tout d'abord, clônez en local le dépôt distant
+Objectives of the project:
+    - Assimilate the basics of front end languages
+    - Develop a user interface for a python web application
+    - Interact with a REST API and manage asynchronous requests
 
-    $ git clone https://github.com/Benoitrenou/projet_06.git    
+# I. Install loval version of the API
 
-# I. Installation de la version locale de l'API 
-
-Rendez-vous sur la page GitHub de l'API et suivez les instructions afin de cloner le dépôt de code et démarrer le serveur en local
+Go to the GitHub page of the API and follow the instructions to clone the code repository and start the server locally
 
     $ https://github.com/OpenClassrooms-Student-Center/OCMovies-API-EN-FR
 
-# II. Lancer le site
+# II. Launch the website
 
-Une fois le serveur de l'API lancé, ouvrez le site JustStreamIt en ouvrant le fichier index.html à l'aide de votre navigateur
-Le site est configuré pour fonctionner normalement avec les principaux navigateurs utilisés (Chrome, Firefox, Edge)
+Once you launched the API server locally, you can launch the website JustStreamIt by opening the file index.html with your navigator.
+
+The website is designed to be compatible with the main browsers: Chrome, Firefox and Edge.
+
+Once on the website, you can select any movie to open a modal window which will present all detailed informations about it.
+
+Following the scenario, three categories and seven movies per category are presented.
